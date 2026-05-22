@@ -35,3 +35,4 @@ The project is divided into three logical layers:
 First, compile the main OS controller:
 ```bash
 g++ os.cpp -o OS
+![Nexus OS Preview](image_079cc7.png)
