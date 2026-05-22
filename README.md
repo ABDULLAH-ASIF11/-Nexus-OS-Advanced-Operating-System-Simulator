@@ -1,38 +1,85 @@
 # 🖥️ Nexus OS: Advanced Operating System Simulator
 
-> A robust, multitasking OS simulation built in C++ using POSIX system calls. Designed to simulate kernel-level resource management, process scheduling, and synchronization.
+![Nexus OS Interface](image_079cc7.png)
+
+[![C++](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg)](https://isocpp.org/)
+[![Platform](https://img.shields.io/badge/Platform-Kali%20Linux-lightgrey.svg)](https://www.kali.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Completed-brightgreen.svg)]()
+
+> A high-performance, multitasking kernel simulation built to demonstrate deep OS concepts including process lifecycles, resource contention, and multilevel scheduling.
+
+---
+
+## 📑 Table of Contents
+* [Core Features](#-key-features)
+* [System Architecture](#-architecture)
+* [Scheduling Logic](#-scheduling-mechanism)
+* [Application Catalog](#-application-catalog)
+* [Installation & Usage](#-getting-started)
 
 ---
 
 ## 🚀 Key Features
 
-* **Multitasking & Scheduling:** Implements a **Multilevel Queue Scheduler** (Round Robin for foreground, FCFS for background, and Priority for system tasks).
-* **True Process Management:** Uses `fork()` and `exec()` to launch independent tasks in separate `xterm` windows.
-* **Hardware Simulation:** Strictly manages user-defined RAM, HDD, and CPU Cores.
-* **Synchronization:** Utilizes **Semaphores** for core limiting and **Mutex Locks** for protecting the PCB (Process Control Block) table.
-* **IPC (Inter-Process Communication):** Communication between the OS and tasks via **Pipes**.
-* **Interruption Handling:** Supports real-time `SIGSTOP`, `SIGCONT`, and `SIGKILL` signals for closing and minimizing apps.
+* **⚙️ Hardware Constraint Simulation:** Dynamically allocates user-defined **RAM**, **HDD**, and **CPU Cores**.
+* **🧵 True Process Management:** Uses `fork()` and `exec()` primitives to ensure each task is a distinct system process.
+* **🛡️ Synchronization Primitives:** * **Semaphores:** For CPU core limiting.
+    * **Mutex Locks:** For Atomic PCB (Process Control Block) updates.
+    * **Condition Variables:** For intelligent RAM-wait state handling.
+* **📡 IPC (Inter-Process Communication):** Implementation of **POSIX Pipes** for resource handshakes between tasks and the kernel.
+* **🛑 Interrupt Handling:** Advanced signal management using `SIGSTOP`, `SIGCONT`, and `SIGKILL`.
 
 ---
 
 ## 🏗️ Architecture
 
-The project is divided into three logical layers:
+Nexus OS operates on a **Three-Tier Architecture** to ensure clean separation of concerns:
 
-1.  **Kernel Layer:** Resource Manager, Memory Allocation, and IPC handling.
-2.  **Scheduler Layer:** Context switching and queue management.
-3.  **Application Layer:** 20+ standalone C++ applications (Calculator, Notepad with Autosave threads, Clock, etc.).
+| Layer | Responsibility | Key Components |
+| :--- | :--- | :--- |
+| **Kernel Layer** | Resource Management & Security | RAM Manager, HDD Allocator, IPC Handler |
+| **Scheduler Layer** | Process Flow & State | Multilevel Queue, Context Switcher |
+| **App Layer** | User Interaction | 20+ C++ Task Binaries |
+
+---
+
+## 🧠 Scheduling Mechanism
+
+The simulator implements a **Priority-Based Multilevel Queue (MLQ)**:
+
+1. **Level 0 (Foreground):** Interactive apps (Round Robin Scheduling).
+2. **Level 1 (Background):** Automation tasks (FCFS Scheduling).
+3. **Level 2 (System):** Kernel utilities (Priority-Based Scheduling).
+
+---
+
+## 📂 Application Catalog
+
+Nexus OS supports over 20 concurrent applications, including:
+
+### 📁 File Management
+* `file_creator.cpp` - Atomic file creation.
+* `file_editor.cpp` - Stream-based text editing.
+* `file_move.cpp` & `file_copy.cpp` - Filesystem manipulation.
+* `file_delete.cpp` - Resource cleanup.
+
+### 🛠️ System Utilities
+* `clock.cpp` - Real-time system clock.
+* `calender.cpp` - Year-view calendar generator.
+* `file_info.cpp` - Metadata & Permission viewer.
 
 ---
 
 ## 🚦 Getting Started
 
-### Prerequisites
-* **OS:** Kali Linux (or any Debian-based distro with `xterm` installed).
+### 📋 Prerequisites
+* **OS:** Kali Linux (Recommended) or Ubuntu.
+* **Terminal:** `xterm` must be installed (`sudo apt install xterm`).
 * **Compiler:** `g++` (GCC).
 
-### Compilation
-First, compile the main OS controller:
+### 🛠️ Compilation
+Compile the core OS and the resource deallocator:
 ```bash
 g++ os.cpp -o OS
-
+g++ dealloc_resource.cpp -o dealloc_resource
