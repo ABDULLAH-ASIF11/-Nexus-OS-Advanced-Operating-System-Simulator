@@ -77,9 +77,22 @@ Nexus OS supports over 20 concurrent applications, including:
 * **OS:** Kali Linux (Recommended) or Ubuntu.
 * **Terminal:** `xterm` must be installed (`sudo apt install xterm`).
 * **Compiler:** `g++` (GCC).
+* **Compiler:**
 
-### 🛠️ Compilation
-Compile the core OS and the resource deallocator:
-```bash
-g++ os.cpp -o OS
-g++ dealloc_resource.cpp -o dealloc_resource
+
+
+1. **🛠️ Compilation** Compile the core OS and the resource deallocator:
+   ```bash
+   g++ os.cpp -o OS
+   g++ dealloc_resource.cpp -o dealloc_resource
+2. **🏃Execution** Launch the OS by passing your hardware constraints (RAM, HDD, Cores):
+   ```bash
+   ./OS <RAM_GB> <HDD_GB> <CORES>
+
+---
+## 👨‍💻 THE CREATOR
+
+| ABDULLAH ASIF |
+| :---: |
+| React / Front-End Developer |
+| [![LinkedIn](https://img.shields.io/badge/LINKEDIN-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abdullah-asif-bhatti/) [![GitHub](https://img.shields.io/badge/GITHUB-%23100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ABDULLAH-ASIF11) |
